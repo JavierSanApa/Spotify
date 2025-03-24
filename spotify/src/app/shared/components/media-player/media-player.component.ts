@@ -78,6 +78,6 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   playNextTrack(): void {
     this.multimediaService.playNext();
   }
-   
+  
 
 }
