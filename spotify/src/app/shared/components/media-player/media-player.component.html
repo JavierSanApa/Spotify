@@ -26,24 +26,11 @@
             <h5 class="track-title sub-title">{{mockCover?.album}}</h5>
         </div>
         <div class="track-like">
-            <button class="btn-like">
+            <button class="like-button" (click)="toggleFavorite()" [class.active]="isFavorite()">
                 <i class="uil uil-heart"></i>
             </button>
         </div>
     </div>
-    <!--<div class="artist-inside" *ngIf="multimediaService.trackInfo$ | async as mockCover">
-
-        <img [src]="mockCover.cover" alt="" class="cover">
-        <div class="track-info">
-            <h3 class="track-title">{{mockCover.name}}</h3>
-            <h5 class="track-title sub-title">{{mockCover?.album}}</h5>
-        </div>
-        <div class="track-like">
-            <button class="btn-like">
-                <i class="uil uil-heart"></i>
-            </button>
-        </div>
-    </div>-->
 </ng-template>
 
 <ng-template #playerZone>

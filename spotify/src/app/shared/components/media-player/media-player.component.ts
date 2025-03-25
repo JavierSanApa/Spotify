@@ -3,6 +3,7 @@ import { TrackModel } from '@core/models/tracks.model';
 import { TrackService } from '@modules/tracks/services/track.service';
 import { MultimediaService } from '@shared/services/multimedia.service';
 import { Subscription } from 'rxjs'; //TODO: Programación reactiva!
+import { FavoriteService } from '@shared/services/favorite.service';
 
 @Component({
   selector: 'app-media-player',
@@ -21,7 +22,9 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   isMuted: boolean = false;
 
   constructor(public multimediaService: MultimediaService,
-    private trackService: TrackService) { }
+    private trackService: TrackService,
+    private favoriteService: FavoriteService
+    ) { }
 
   playRandomTrack(): void {
     this.trackService.getAllRandom$().subscribe(randomTracks => {
@@ -80,4 +83,17 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   }
   
 
+  toggleFavorite(): void {
+    const currentTrack = this.multimediaService.trackInfo$.getValue();
+    if (currentTrack) {
+      this.favoriteService.toggleFavorite(currentTrack);
+    }
+  }
+
+  isFavorite(): boolean {
+    const currentTrack = this.multimediaService.trackInfo$.getValue();
+    return currentTrack 
+      ? this.favoriteService.isFavorite(currentTrack._id)
+      : false;
+  }
 }
