@@ -1,28 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
 import { SearchService } from '@modules/history/services/search.service';
-import { Observable, of } from 'rxjs';
-
 
 @Component({
   selector: 'app-history-page',
-  templateUrl: './history-page.component.html',
-  styleUrl: './history-page.component.css'
+  templateUrl: './history-page.component.html'
 })
 export class HistoryPageComponent implements OnInit {
-
-  listResults$: Observable<any> = of([])
+  tracks: Array<TrackModel> = [];
+  filteredTracks: Array<TrackModel> = [];
 
   constructor(private searchService: SearchService) { }
 
   ngOnInit(): void {
+    this.searchService.getAllTracks$().subscribe((response: any) => {
+      const { data } = response;
+      this.tracks = data;
+      this.filteredTracks = data;
+    });
   }
 
-  receiveData(event: string): void{
-    //TODO: leemos el termino y sabes que solo se ejecuta cuando tiene 3 caracters
-    console.log('🎁 Estoy en el padre jua jua...', event);
-    this.listResults$ = this.searchService.searchTracks$(event)
-
+  searchTracks(term: string): void {
+    if (!term) {
+      this.filteredTracks = this.tracks;
+      return;
+    }
+    
+    this.filteredTracks = this.tracks.filter(track => 
+      track.name.toLowerCase().includes(term.toLowerCase())
+    );
   }
-
 }

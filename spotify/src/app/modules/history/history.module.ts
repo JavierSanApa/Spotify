@@ -6,6 +6,7 @@ import { HistoryPageComponent } from './pages/history-page/history-page.componen
 import { SearchComponent } from './components/search/search.component';
 import { SharedModule } from '@shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { SearchService } from './services/search.service';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
     HistoryRoutingModule,
     SharedModule,
     FormsModule
-  ]
+  ],
+  providers: [SearchService]
 })
 export class HistoryModule { }
