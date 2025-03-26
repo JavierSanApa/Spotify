@@ -40,3 +40,26 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Archivos de entorno (credenciales o configuraciones sensibles)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Logs
+*.log
+logs
+*.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de caché de Angular
+.angular/cache
+.angular/config.json
+
+# Dependencias y compilación
+package-lock.json
+yarn.lock
